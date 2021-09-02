@@ -56,7 +56,8 @@ const displaySearchResult = books => {
             <div class="shadow-lg p-3 m-5 rounded card-body h-500px">
                 <img src="https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg" class="card-img-top img-fluid" alt="...">
                 <h5 class="py-4 card-title">Title: ${book.title}</h5>
-                <h6 class="card-title">Author: ${book.author_name}</h6>
+                <h6 class="card-title pb-4">Author: ${book.author_name}</h6>
+                <h6 class="card-title">Publisher: ${book.publisher[0]}</h6>
                 <h6 class="card-title">First Publish Year: ${book.first_publish_year}</h6>
             </div>
         `;
@@ -66,7 +67,8 @@ const displaySearchResult = books => {
             <div class="shadow-lg p-3 m-5 rounded card-body h-500px">
                 <img src="https://cdn.pixabay.com/photo/2013/07/13/13/34/book-161117_1280.png" class="card-img-top img-fluid" alt="...">
                 <h5 class="py-4 card-title">Title: ${book.title}</h5>
-                <h6 class="card-title">Author: ${book.author_name}</h6>
+                <h6 class="card-title pb-4">Author: ${book.author_name}</h6>
+                <h6 class="card-title">Publisher: ${book.publisher[0]}</h6>
                 <h6 class="card-title">First Publish Year: ${book.first_publish_year}</h6>
             </div>
         `;
