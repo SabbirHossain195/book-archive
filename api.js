@@ -1,5 +1,6 @@
 document.getElementById('error-message').style.display = 'none';
 
+// search a book
 const searchBook = () => {
     const searchField = document.getElementById('search-field');
     const searchText = searchField.value;
@@ -46,7 +47,6 @@ const countSearchResult = (totalNumber, search) => {
 const displaySearchResult = books => {
     const searchResult = document.getElementById('search-result');
     searchResult.textContent = '';
-    // const publisher = <h6 class="card-title">Publisher: ${book.publisher[0]}</h6>
     books.forEach(book => {
         const div = document.createElement('div');
         div.classList.add('col');
