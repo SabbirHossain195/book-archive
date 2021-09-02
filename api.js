@@ -9,15 +9,14 @@ const searchBook = () => {
     document.getElementById('error-message').style.display = 'none';
 
     // for counting total result
-    const url1 = `https://openlibrary.org/search.json?q=${searchText}`;
-    fetch(url1)
+    const url = `https://openlibrary.org/search.json?q=${searchText}`;
+    fetch(url)
         .then(res => res.json())
         .then(data => countSearchResult(data.numFound, searchText))
         .catch(error => displayError(error));
 
     // for showing total result
-    const url2 = `https://openlibrary.org/search.json?q=${searchText}`;
-    fetch(url2)
+    fetch(url)
         .then(res => res.json())
         .then(data => displaySearchResult(data.docs))
         .catch(error => displayError(error));
@@ -47,14 +46,37 @@ const countSearchResult = (totalNumber, search) => {
 const displaySearchResult = books => {
     const searchResult = document.getElementById('search-result');
     searchResult.textContent = '';
+    // const publisher = <h6 class="card-title">Publisher: ${book.publisher[0]}</h6>
     books.forEach(book => {
         const div = document.createElement('div');
         div.classList.add('col');
         div.classList.add('text-center');
-        if (book.cover_i) {
+        if (book.cover_i && book.publisher) {
             div.innerHTML = `
             <div class="shadow-lg p-3 m-5 rounded card-body h-500px">
                 <img src="https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg" class="card-img-top img-fluid" alt="...">
+                <h5 class="py-4 card-title">Title: ${book.title}</h5>
+                <h6 class="card-title pb-4">Author: ${book.author_name}</h6>
+                <h6 class="card-title">Publisher: ${book.publisher[0]}</h6>
+                <h6 class="card-title">First Publish Year: ${book.first_publish_year}</h6>
+            </div>
+        `;
+        }
+        else if (book.cover_i) {
+            div.innerHTML = `
+            <div class="shadow-lg p-3 m-5 rounded card-body h-500px">
+                <img src="https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg" class="card-img-top img-fluid" alt="...">
+                <h5 class="py-4 card-title">Title: ${book.title}</h5>
+                <h6 class="card-title pb-4">Author: ${book.author_name}</h6>
+                <h6 class="card-title">Publisher: </h6>
+                <h6 class="card-title">First Publish Year: ${book.first_publish_year}</h6>
+            </div>
+        `;
+        }
+        else if (book.publisher) {
+            div.innerHTML = `
+            <div class="shadow-lg p-3 m-5 rounded card-body h-500px">
+                <img src="https://cdn.pixabay.com/photo/2013/07/13/13/34/book-161117_1280.png" class="card-img-top img-fluid" alt="...">
                 <h5 class="py-4 card-title">Title: ${book.title}</h5>
                 <h6 class="card-title pb-4">Author: ${book.author_name}</h6>
                 <h6 class="card-title">Publisher: ${book.publisher[0]}</h6>
@@ -68,7 +90,7 @@ const displaySearchResult = books => {
                 <img src="https://cdn.pixabay.com/photo/2013/07/13/13/34/book-161117_1280.png" class="card-img-top img-fluid" alt="...">
                 <h5 class="py-4 card-title">Title: ${book.title}</h5>
                 <h6 class="card-title pb-4">Author: ${book.author_name}</h6>
-                <h6 class="card-title">Publisher: ${book.publisher[0]}</h6>
+                <h6 class="card-title">Publisher: </h6>
                 <h6 class="card-title">First Publish Year: ${book.first_publish_year}</h6>
             </div>
         `;
