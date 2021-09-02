@@ -6,22 +6,26 @@ const searchBook = () => {
     searchField.value = '';
     console.log(searchText);
 
-    if (searchText === '') {
-        document.getElementById('error-message').style.display = 'block';
-    }
-    else {
-        // for counting total result
-        const url1 = `https://openlibrary.org/search.json?q=${searchText}`;
-        fetch(url1)
-            .then(res => res.json())
-            .then(data => countSearchResult(data.numFound, searchText))
+    document.getElementById('error-message').style.display = 'none';
 
-        // for showing total result
-        const url2 = `https://openlibrary.org/search.json?q=${searchText}`;
-        fetch(url2)
-            .then(res => res.json())
-            .then(data => displaySearchResult(data.docs))
-    }
+    // for counting total result
+    const url1 = `https://openlibrary.org/search.json?q=${searchText}`;
+    fetch(url1)
+        .then(res => res.json())
+        .then(data => countSearchResult(data.numFound, searchText))
+        .catch(error => displayError(error));
+
+    // for showing total result
+    const url2 = `https://openlibrary.org/search.json?q=${searchText}`;
+    fetch(url2)
+        .then(res => res.json())
+        .then(data => displaySearchResult(data.docs))
+        .catch(error => displayError(error));
+}
+
+// error checking
+const displayError = error => {
+    document.getElementById('error-message').style.display = 'block';
 }
 
 // showing total result
@@ -41,7 +45,6 @@ const countSearchResult = (totalNumber, search) => {
 
 // display searching result 
 const displaySearchResult = books => {
-    console.log(books);
     const searchResult = document.getElementById('search-result');
     searchResult.textContent = '';
     books.forEach(book => {
