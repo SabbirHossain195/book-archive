@@ -20,19 +20,27 @@
 
         <!-- book search area -->
         <div class="input-group mb-3 w-50 mx-auto">
-            <input id="search-field" type="text" class="form-control" placeholder="Search the book you want"
+            <input id="search-field" type="text" class="form-control rounded" placeholder="Search the book you want"
                 aria-label="Recipient's username" aria-describedby="button-addon2">
-            <button onclick="searchBook()" class="btn btn-outline-secondary" type="button"
+            <button onclick="searchBook()" class="btn btn-outline-secondary ms-3 rounded" type="button"
                 id="button-search">Search</button>
         </div>
 
+        <!-- total result counted -->
+        <div id="counted-result">
+
+        </div>
 
         <!-- book search result -->
         <div id="search-result" class="row row-cols-1 row-cols-md-3 g-4 h-100">
         </div>
+
+        <!-- error message -->
+        <div>
+            <h6 id="error-message" class="text-danger text-center mt-5 pt-5">Something went wrong please try again later
+                with a valid book name......</h6>
+        </div>
     </section>
-
-
 
     <!-- js linked -->
     <script src="api.js"></script>
